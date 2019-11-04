@@ -320,7 +320,9 @@ double CommunityGirvanNewman(PUNGraph& Graph, TCnComV& CmtyV) {
   CmtyV.Clr();
   TIntV Cmty1, Cmty2;
   int failToUpdate = 0;
+  int count_it = 0;
   while (true) {
+      count_it++;
     TSnapDetail::CmtyGirvanNewmanStep(Graph, Cmty1, Cmty2);
     const double Q = TSnapDetail::_GirvanNewmanGetModularity(Graph, OutDegH, NEdges, CurCmtyV);
     //printf("current modularity: %f\n", Q);
@@ -332,8 +334,12 @@ double CommunityGirvanNewman(PUNGraph& Graph, TCnComV& CmtyV) {
         failToUpdate++;
     }
     if (Cmty1.Len() == 0 || Cmty2.Len() == 0) { break; }
-    if(failToUpdate >= 10){
+    if(failToUpdate >= 5){
         printf("Faile to increase the modularity\n");
+        break;
+    }
+    if(count_it >= 25){
+        printf("Terminate after 25 iteration\n");
         break;
     }
   }
