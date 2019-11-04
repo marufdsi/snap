@@ -319,6 +319,7 @@ double CommunityGirvanNewman(PUNGraph& Graph, TCnComV& CmtyV) {
   TCnComV CurCmtyV;
   CmtyV.Clr();
   TIntV Cmty1, Cmty2;
+  int failToUpdate = 0;
   while (true) {
     TSnapDetail::CmtyGirvanNewmanStep(Graph, Cmty1, Cmty2);
     const double Q = TSnapDetail::_GirvanNewmanGetModularity(Graph, OutDegH, NEdges, CurCmtyV);
@@ -326,8 +327,15 @@ double CommunityGirvanNewman(PUNGraph& Graph, TCnComV& CmtyV) {
     if (Q > BestQ) {
       BestQ = Q; 
       CmtyV.Swap(CurCmtyV);
+      failToUpdate = 0;
+    } else{
+        failToUpdate++;
     }
     if (Cmty1.Len() == 0 || Cmty2.Len() == 0) { break; }
+    if(failToUpdate >= 10){
+        printf("Faile to increase the modularity\n");
+        break;
+    }
   }
   return BestQ;
 }
@@ -364,7 +372,9 @@ double Infomap(PUNGraph& Graph, TCnComV& CmtyV){
   for (TUNGraph::TNodeI NI = Graph->BegNI(); NI < Graph->EndNI(); NI++)
     nodes.Add(NI.GetId());
 
+  int count_loop = 0;
   do {
+      count_loop++;
     PrevIterationCodeLength = MinCodeLength;
     TRnd rnd;
     rnd.Randomize();
@@ -394,7 +404,7 @@ double Infomap(PUNGraph& Graph, TCnComV& CmtyV){
         }
       }
     }
-  } while (MinCodeLength<PrevIterationCodeLength);
+  } while (MinCodeLength<PrevIterationCodeLength || count_loop>= nodes.Len());
 
   Module.SortByDat(true);
 
