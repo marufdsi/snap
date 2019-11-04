@@ -2,8 +2,10 @@
 
 int main(int argc, char *argv[]) {
     Env = TEnv(argc, argv, TNotify::StdNotify);
+    printf("Argument read done!!\n");
     Env.PrepArgs(
             TStr::Fmt("Network community detection. build: %s, %s. Time: %s", __TIME__, __DATE__, TExeTm::GetCurTm()));
+    printf("Argument prep done!!\n");
     TExeTm ExeTm;
     Try
     const TStr InFNm = Env.GetIfArgPrefixStr("-i:", "graph.txt", "Input graph (undirected graph)");
