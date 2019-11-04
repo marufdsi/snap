@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 int main(int argc, char *argv[]) {
+    printf("read argument!!\n");
     Env = TEnv(argc, argv, TNotify::StdNotify);
     printf("Argument read done!!\n");
     Env.PrepArgs(
