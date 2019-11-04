@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     const TStr OutFNm = Env.GetIfArgPrefixStr("-o:", "communities.txt", "Output file");
     const int CmtyAlg = Env.GetIfArgPrefixInt("-a:", 2,
                                               "Algorithm: 1:Girvan-Newman, 2:Clauset-Newman-Moore, 3:Infomap");
-
+    printf("********** Load Graph ********\n");
     PUNGraph Graph = TSnap::LoadEdgeList<PUNGraph>(InFNm, false);
     //PUNGraph Graph = TSnap::LoadEdgeList<PUNGraph>("../as20graph.txt", false);
     //PUNGraph Graph = TSnap::GenRndGnm<PUNGraph>(5000, 10000); // generate a random graph
