@@ -1,28 +1,21 @@
 #include "stdafx.h"
 
 int main(int argc, char *argv[]) {
-    printf("read argument!!\n");
-//    Env = TEnv(argc, argv, TNotify::StdNotify);
-//    printf("Argument read done!!\n");
-//    Env.PrepArgs(
-//            TStr::Fmt("Network community detection. build: %s, %s. Time: %s", __TIME__, __DATE__, TExeTm::GetCurTm()));
-//    printf("Argument prep done!!\n");
+    Env = TEnv(argc, argv, TNotify::StdNotify);
+    Env.PrepArgs(
+            TStr::Fmt("Network community detection. build: %s, %s. Time: %s", __TIME__, __DATE__, TExeTm::GetCurTm()));
     TExeTm ExeTm;
     Try
-    const TStr InFNm = argv[1];
-    const TStr OutFNm = argv[2];
-    const int CmtyAlg = atoi(argv[3]);
-    /*const TStr InFNm = Env.GetIfArgPrefixStr("-i:", "graph.txt", "Input graph (undirected graph)");
+    const TStr InFNm = Env.GetIfArgPrefixStr("-i:", "graph.txt", "Input graph (undirected graph)");
     const TStr OutFNm = Env.GetIfArgPrefixStr("-o:", "communities.txt", "Output file");
     const int CmtyAlg = Env.GetIfArgPrefixInt("-a:", 2,
-                                              "Algorithm: 1:Girvan-Newman, 2:Clauset-Newman-Moore, 3:Infomap");*/
-    printf("********** Load Graph ********\n");
+                                              "Algorithm: 1:Girvan-Newman, 2:Clauset-Newman-Moore, 3:Infomap");
+
     PUNGraph Graph = TSnap::LoadEdgeList<PUNGraph>(InFNm, false);
     //PUNGraph Graph = TSnap::LoadEdgeList<PUNGraph>("../as20graph.txt", false);
     //PUNGraph Graph = TSnap::GenRndGnm<PUNGraph>(5000, 10000); // generate a random graph
 
     TSnap::DelSelfEdges(Graph);
-    printf("Graph read done!!\n");
     TCnComV CmtyV;
     double Q = 0.0;
     TStr CmtyAlgStr;
@@ -47,13 +40,12 @@ int main(int argc, char *argv[]) {
         fprintf(F, "# Average code length: %f\n", Q);
     }
     fprintf(F, "# Communities: %d\n", CmtyV.Len());
-    fprintf(F, "# Runtime: %s (%s)\n", ExeTm.GetTmStr(), TSecTm::GetCurTm().GetTmStr().CStr());
-    /*fprintf(F, "# NId\tCommunityId\n");
+    fprintf(F, "# NId\tCommunityId\n");
     for (int c = 0; c < CmtyV.Len(); c++) {
         for (int i = 0; i < CmtyV[c].Len(); i++) {
             fprintf(F, "%d\t%d\n", CmtyV[c][i].Val, c);
         }
-    }*/
+    }
     fclose(F);
 
     Catch
