@@ -416,7 +416,7 @@ double Infomap(PUNGraph& Graph, TCnComV& CmtyV){
         }
       }
     }
-  } while (MinCodeLength<PrevIterationCodeLength || count_loop>= nodes.Len());
+  } while (MinCodeLength<PrevIterationCodeLength || count_loop<= 25);
 
   Module.SortByDat(true);
 
