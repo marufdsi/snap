@@ -2,17 +2,20 @@
 
 int main(int argc, char *argv[]) {
     printf("read argument!!\n");
-    Env = TEnv(argc, argv, TNotify::StdNotify);
-    printf("Argument read done!!\n");
-    Env.PrepArgs(
-            TStr::Fmt("Network community detection. build: %s, %s. Time: %s", __TIME__, __DATE__, TExeTm::GetCurTm()));
-    printf("Argument prep done!!\n");
+//    Env = TEnv(argc, argv, TNotify::StdNotify);
+//    printf("Argument read done!!\n");
+//    Env.PrepArgs(
+//            TStr::Fmt("Network community detection. build: %s, %s. Time: %s", __TIME__, __DATE__, TExeTm::GetCurTm()));
+//    printf("Argument prep done!!\n");
     TExeTm ExeTm;
     Try
-    const TStr InFNm = Env.GetIfArgPrefixStr("-i:", "graph.txt", "Input graph (undirected graph)");
+    const TStr InFNm = argv[1];
+    const TStr OutFNm = argv[2];
+    const int CmtyAlg = argv[3];
+    /*const TStr InFNm = Env.GetIfArgPrefixStr("-i:", "graph.txt", "Input graph (undirected graph)");
     const TStr OutFNm = Env.GetIfArgPrefixStr("-o:", "communities.txt", "Output file");
     const int CmtyAlg = Env.GetIfArgPrefixInt("-a:", 2,
-                                              "Algorithm: 1:Girvan-Newman, 2:Clauset-Newman-Moore, 3:Infomap");
+                                              "Algorithm: 1:Girvan-Newman, 2:Clauset-Newman-Moore, 3:Infomap");*/
     printf("********** Load Graph ********\n");
     PUNGraph Graph = TSnap::LoadEdgeList<PUNGraph>(InFNm, false);
     //PUNGraph Graph = TSnap::LoadEdgeList<PUNGraph>("../as20graph.txt", false);
