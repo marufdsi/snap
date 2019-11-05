@@ -1450,7 +1450,14 @@ public:
   static double CmtyCMN(const PUNGraph& Graph, TCnComV& CmtyV) {
     TCNMQMatrix QMatrix(Graph);
     // maximize modularity
-    while (QMatrix.MergeBestQ()) {}
+    int count_loop = 0;
+    while (QMatrix.MergeBestQ()) {
+        count_loop++;
+        if(count_loop>=25){
+            printf("Exits threshold value\n");
+            break;
+        }
+    }
     // reconstruct communities
     THash<TInt, TIntV> IdCmtyH;
     for (TUNGraph::TNodeI NI = Graph->BegNI(); NI < Graph->EndNI(); NI++) {
