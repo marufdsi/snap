@@ -18,7 +18,7 @@ void CmtyGirvanNewmanStep(PUNGraph& Graph, TIntV& Cmty1, TIntV& Cmty2) {
   Cmty1.Clr(false);  Cmty2.Clr(false);
   int count_loop = 0;
   while (true) {
-      count_loop++;
+//      count_loop++;
     TSnap::GetBetweennessCentr(Graph, BtwEH);
     BtwEH.SortByDat(false);
     if (BtwEH.Empty()) { return; }
@@ -31,10 +31,10 @@ void CmtyGirvanNewmanStep(PUNGraph& Graph, TIntV& Cmty1, TIntV& Cmty2) {
       TSnap::GetNodeWcc(Graph, NId2, Cmty2);
       return;
     }
-    if(count_loop>=10) {
+    /*if(count_loop>=10) {
         printf("No cut-edge found\n");
         return;
-    }
+    }*/
   }
 }
 
@@ -336,14 +336,14 @@ double CommunityGirvanNewman(PUNGraph& Graph, TCnComV& CmtyV) {
       BestQ = Q; 
       CmtyV.Swap(CurCmtyV);
       failToUpdate = 0;
-    } else{
+    } /*else{
         failToUpdate++;
-    }
+    }*/
     if (Cmty1.Len() == 0 || Cmty2.Len() == 0) { break; }
-    if(failToUpdate >= 5){
+    /*if(failToUpdate >= 5){
         printf("Faile to increase the modularity\n");
         break;
-    }
+    }*/
     if(count_it >= 25){
         printf("Terminate after 25 iteration\n");
         break;
@@ -386,7 +386,7 @@ double Infomap(PUNGraph& Graph, TCnComV& CmtyV){
 
   int count_loop = 0;
   do {
-      count_loop++;
+//      count_loop++;
     PrevIterationCodeLength = MinCodeLength;
     TRnd rnd;
     rnd.Randomize();
@@ -416,7 +416,7 @@ double Infomap(PUNGraph& Graph, TCnComV& CmtyV){
         }
       }
     }
-  } while (MinCodeLength<PrevIterationCodeLength || count_loop<= 25);
+  } while (MinCodeLength<PrevIterationCodeLength /*|| count_loop<= 25*/);
 
   Module.SortByDat(true);
 
