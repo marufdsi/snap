@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     Try
     const TStr InFNm = argv[1];
     const TStr OutFNm = argv[2];
-    const int CmtyAlg = argv[3];
+    const int CmtyAlg = atoi(argv[3]);
     /*const TStr InFNm = Env.GetIfArgPrefixStr("-i:", "graph.txt", "Input graph (undirected graph)");
     const TStr OutFNm = Env.GetIfArgPrefixStr("-o:", "communities.txt", "Output file");
     const int CmtyAlg = Env.GetIfArgPrefixInt("-a:", 2,
