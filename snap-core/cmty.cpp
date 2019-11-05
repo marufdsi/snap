@@ -31,7 +31,7 @@ void CmtyGirvanNewmanStep(PUNGraph& Graph, TIntV& Cmty1, TIntV& Cmty2) {
       TSnap::GetNodeWcc(Graph, NId2, Cmty2);
       return;
     }
-    if(count_loop>=5) {
+    if(count_loop>=10) {
         printf("No cut-edge found\n");
         return;
     }
