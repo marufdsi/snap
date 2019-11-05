@@ -31,8 +31,8 @@ namespace TSnap {
                     TSnap::GetNodeWcc(Graph, NId2, Cmty2);
                     return;
                 }
-                if(Graph->GetEdges() <= (edges/2))
-                    return;
+//                if(Graph->GetEdges() <= (edges/2))
+//                    return;
             }
         }
 
