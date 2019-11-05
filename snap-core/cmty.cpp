@@ -17,7 +17,7 @@ namespace TSnap {
             TBreathFS <PUNGraph> BFS(Graph);
             Cmty1.Clr(false);
             Cmty2.Clr(false);
-            int nodes = Graph->GetNodes();
+            int edges = Graph->GetEdges();
             while (true) {
                 TSnap::GetBetweennessCentr(Graph, BtwEH);
                 BtwEH.SortByDat(false);
@@ -31,7 +31,7 @@ namespace TSnap {
                     TSnap::GetNodeWcc(Graph, NId2, Cmty2);
                     return;
                 }
-                if(Graph->GetNodes() <= (nodes/2))
+                if(Graph->GetEdges() <= (edges/2))
                     return;
             }
         }
