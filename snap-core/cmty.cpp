@@ -1453,10 +1453,10 @@ public:
     int count_loop = 0;
     while (QMatrix.MergeBestQ()) {
         count_loop++;
-        if(count_loop>=25){
-            printf("Exits threshold value\n");
-            break;
-        }
+//        if(count_loop>=25){
+//            printf("Exits threshold value\n");
+//            break;
+//        }
     }
     // reconstruct communities
     THash<TInt, TIntV> IdCmtyH;
