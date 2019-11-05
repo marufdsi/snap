@@ -40,12 +40,13 @@ int main(int argc, char *argv[]) {
         fprintf(F, "# Average code length: %f\n", Q);
     }
     fprintf(F, "# Communities: %d\n", CmtyV.Len());
+    fprintf(F, "# Runtime: %s (%s)\n", ExeTm.GetTmStr(), TSecTm::GetCurTm().GetTmStr().CStr());
     fprintf(F, "# NId\tCommunityId\n");
-    for (int c = 0; c < CmtyV.Len(); c++) {
+    /*for (int c = 0; c < CmtyV.Len(); c++) {
         for (int i = 0; i < CmtyV[c].Len(); i++) {
             fprintf(F, "%d\t%d\n", CmtyV[c][i].Val, c);
         }
-    }
+    }*/
     fclose(F);
 
     Catch
