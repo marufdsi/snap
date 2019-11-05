@@ -322,7 +322,9 @@ namespace TSnap {
         TCnComV CurCmtyV;
         CmtyV.Clr();
         TIntV Cmty1, Cmty2;
+        int loop_count = 0;
         while (true) {
+            loop_count++;
             TSnapDetail::CmtyGirvanNewmanStep(Graph, Cmty1, Cmty2);
             const double Q = TSnapDetail::_GirvanNewmanGetModularity(Graph, OutDegH, NEdges, CurCmtyV);
             //printf("current modularity: %f\n", Q);
@@ -330,7 +332,7 @@ namespace TSnap {
                 BestQ = Q;
                 CmtyV.Swap(CurCmtyV);
             }
-            if (Cmty1.Len() == 0 || Cmty2.Len() == 0) { break; }
+            if (Cmty1.Len() == 0 || Cmty2.Len() == 0 || loop_count>=25) { break; }
         }
         return BestQ;
     }
