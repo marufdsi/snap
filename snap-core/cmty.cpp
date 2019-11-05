@@ -16,7 +16,9 @@ void CmtyGirvanNewmanStep(PUNGraph& Graph, TIntV& Cmty1, TIntV& Cmty2) {
   TIntPrFltH BtwEH;
   TBreathFS<PUNGraph> BFS(Graph);
   Cmty1.Clr(false);  Cmty2.Clr(false);
+  int count_loop = 0;
   while (true) {
+      count_loop++;
     TSnap::GetBetweennessCentr(Graph, BtwEH);
     BtwEH.SortByDat(false);
     if (BtwEH.Empty()) { return; }
@@ -28,6 +30,10 @@ void CmtyGirvanNewmanStep(PUNGraph& Graph, TIntV& Cmty1, TIntV& Cmty2) {
       TSnap::GetNodeWcc(Graph, NId1, Cmty1);
       TSnap::GetNodeWcc(Graph, NId2, Cmty2);
       return;
+    }
+    if(count_loop>=5) {
+        printf("No cut-edge found\n");
+        return;
     }
   }
 }
